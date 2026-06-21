@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import Image from "next/image";
 import {
   MapPin,
@@ -21,8 +22,10 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
+import { getContactInfo, getPhoneLink } from "@/lib/contact";
 
 export default function ContactPage() {
+  const contact = useMemo(() => getContactInfo(), []);
   return (
     <main className="bg-white text-[#0F172A]">
       {/* ─── HERO CONTACT ─── */}
@@ -106,7 +109,7 @@ export default function ContactPage() {
                       Adresse
                     </p>
                     <p className="mt-1 font-[var(--font-body)] text-sm leading-relaxed text-slate-600">
-                      Zone Industrielle, Sétif, Algérie
+                      {contact.address}
                     </p>
                   </div>
                 </div>
@@ -120,10 +123,10 @@ export default function ContactPage() {
                       Téléphone
                     </p>
                     <p className="mt-1 font-[var(--font-body)] text-sm text-slate-600">
-                      +213 5XX XXX XXX
+                      {contact.phoneFormatted[0]}
                     </p>
                     <p className="font-[var(--font-body)] text-sm text-slate-600">
-                      +213 3XX XXX XXX
+                      {contact.phoneFormatted[1]}
                     </p>
                   </div>
                 </div>
@@ -137,7 +140,7 @@ export default function ContactPage() {
                       Email
                     </p>
                     <p className="mt-1 font-[var(--font-body)] text-sm text-slate-600">
-                      contact@kazelec.dz
+                      {contact.email}
                     </p>
                   </div>
                 </div>
@@ -151,10 +154,7 @@ export default function ContactPage() {
                       Horaires
                     </p>
                     <p className="mt-1 font-[var(--font-body)] text-sm text-slate-600">
-                      Lun - Ven : 08:00 - 17:00
-                    </p>
-                    <p className="font-[var(--font-body)] text-sm text-slate-600">
-                      Sam : 08:00 - 12:00
+                      {contact.workingHours}
                     </p>
                   </div>
                 </div>
@@ -175,10 +175,12 @@ export default function ContactPage() {
                 équipes.
               </p>
               <a
-                href="#"
+                href="https://maps.google.com/?cid=10668117450045588455"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative mt-6 inline-flex items-center gap-2 font-[var(--font-heading)] text-sm font-semibold text-[#FF7A00] transition group-hover:gap-3"
               >
-                Prendre rendez-vous
+                Voir localisation
                 <ChevronRight className="h-4 w-4" />
               </a>
             </article>
@@ -543,7 +545,7 @@ export default function ContactPage() {
               </p>
             </div>
             <a
-              href="tel:+213500000000"
+              href={getPhoneLink()}
               className="inline-flex shrink-0 items-center gap-3 rounded-lg bg-white px-8 py-4 font-[var(--font-heading)] text-sm font-bold uppercase tracking-wide text-[#003B7A] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
               <Phone className="h-5 w-5" />

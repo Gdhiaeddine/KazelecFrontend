@@ -1,0 +1,19 @@
+{
+  "company": "KAZELEC",
+  "phones": [
+    "0560 40 50 30",
+    "0560 40 50 20"
+  ],
+  "phoneFormatted": [
+    "+213 560 40 50 30",
+    "+213 560 40 50 20"
+  ],
+  "email": "SOLUTIONS@KAZELEC.COM",
+  "address": "Smara Ouled Boudhil Section 12 Groupe 165 Guedjel, Sétif 19000",
+  "workingHours": "DIM-JEU 8:00AM - 4:00PM",
+  "social": {
+    "linkedin": "#",
+    "facebook": "#",
+    "twitter": "#"
+  }
+}

@@ -17,17 +17,13 @@ import {
   ExternalLink,
 } from "lucide-react";
 import type { NewsArticle } from "@/types/news";
+import { formatDateFR } from "@/lib/format";
 
 type SidebarArticle = {
   slug: string;
   title: string;
   date: string;
 };
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-}
 
 export default function ArticleDetailClient({
   article,
@@ -108,7 +104,7 @@ export default function ArticleDetailClient({
             <div className="mt-6 flex flex-wrap items-center gap-4 opacity-0 animate-[fadeUp_0.8s_ease-out_forwards] [animation-delay:450ms]">
               <span className="inline-flex items-center gap-1.5 font-[var(--font-body)] text-sm text-white/70">
                 <Calendar className="h-4 w-4 text-[#FF7A00]" />
-                {formatDate(article.publishedAt)}
+                {formatDateFR(article.publishedAt)}
               </span>
               <span className="inline-flex items-center gap-1.5 font-[var(--font-body)] text-sm text-white/70">
                 <Clock className="h-4 w-4 text-[#FF7A00]" />
@@ -286,7 +282,7 @@ export default function ArticleDetailClient({
                         {item.title}
                       </p>
                       <p className="mt-1 font-[var(--font-body)] text-xs text-slate-400">
-                        {formatDate(item.date)}
+                        {formatDateFR(item.date)}
                       </p>
                     </div>
                   </Link>

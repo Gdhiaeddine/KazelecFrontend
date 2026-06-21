@@ -16,6 +16,9 @@ import {
   Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { getContactInfo, getPhoneLink } from "@/lib/contact";
+
+const contact = getContactInfo();
 
 const navItems = [
   { label: "Accueil", href: "/" },
@@ -143,7 +146,7 @@ export function Header() {
         </div>
 
         <a
-          href="tel:+213500000000"
+          href={getPhoneLink()}
           className="hidden items-center gap-3 rounded-full border border-[#E5EAF0] bg-white py-2 pl-2 pr-4 shadow-sm transition hover:-translate-y-0.5 hover:border-[#FF7A00]/40 hover:shadow-lg xl:flex"
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF7A00] text-white">
@@ -151,7 +154,7 @@ export function Header() {
           </span>
           <span className="leading-tight">
             <span className="block font-[var(--font-heading)] text-sm font-bold text-[#003B7A]">
-              +213 5XX XXX XXX
+              {contact.phoneFormatted[0]}
             </span>
             <span className="font-[var(--font-body)] text-xs font-medium text-slate-500">
               Appelez nos experts
@@ -174,11 +177,11 @@ export function Header() {
               </a>
             ))}
             <a
-              href="tel:+213500000000"
+              href={getPhoneLink()}
               className="mt-3 flex items-center gap-3 rounded-lg bg-[#FF7A00] px-4 py-3 font-[var(--font-heading)] text-sm font-semibold text-white"
             >
               <Phone className="h-4 w-4" />
-              +213 5XX XXX XXX
+              {contact.phoneFormatted[0]}
             </a>
           </div>
         </details>
@@ -383,7 +386,7 @@ export function StatsCtaSection() {
             Nos experts sont à votre écoute.
           </p>
           <a
-            href="tel:+213500000000"
+            href={getPhoneLink()}
             className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-5 py-4 font-[var(--font-heading)] text-sm font-semibold uppercase tracking-wide text-[#003B7A] transition hover:scale-[1.02]"
           >
             Appeler maintenant
@@ -443,11 +446,11 @@ export function Footer() {
           </h3>
           <div className="mt-5 grid gap-3 font-[var(--font-body)] text-sm font-medium leading-relaxed text-slate-600">
             <p>Zone Industrielle, Sétif, Algérie</p>
-            <a href="tel:+213500000000" className="hover:text-[#FF7A00]">
-              +213 5XX XXX XXX
+            <a href={getPhoneLink()} className="hover:text-[#FF7A00]">
+              {contact.phoneFormatted[0]}
             </a>
-            <a href="mailto:contact@kazelec.dz" className="hover:text-[#FF7A00]">
-              contact@kazelec.dz
+            <a href={`mailto:${contact.email}`} className="hover:text-[#FF7A00]">
+              {contact.email}
             </a>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CtaBanner from "@/components/CtaBanner";
@@ -18,10 +18,8 @@ import {
   Zap,
 } from "lucide-react";
 import { getAllNews, getAllCategories } from "@/lib/news";
+import { formatDateFR } from "@/lib/format";
 import type { NewsArticle } from "@/types/news";
-
-const allArticles = getAllNews();
-const allCategories = getAllCategories();
 
 const trustItems = [
   { icon: Newspaper, label: "Informations fiables", desc: "Des contenus vérifiés et transparents" },
@@ -30,10 +28,6 @@ const trustItems = [
   { icon: Calendar, label: "Événements", desc: "Salons, rencontres et événements à venir" },
 ];
 
-const filterCategories = ["Tous", ...allCategories];
-
-const popularArticles = allArticles.slice(0, 4);
-
 const whyCards = [
   { icon: Zap, title: "Restez informés", desc: "Suivez nos actualités en temps réel." },
   { icon: CheckCircle2, title: "Informations fiables", desc: "Des contenus vérifiés et publiés par notre équipe." },
@@ -41,13 +35,13 @@ const whyCards = [
   { icon: Users, title: "Engagement", desc: "Nous partageons notre expertise et notre savoir-faire." },
 ];
 
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-}
-
 export default function ActualitesPage() {
   const [activeFilter, setActiveFilter] = useState("Tous");
+
+  const allArticles = useMemo(() => getAllNews(), []);
+  const allCategories = useMemo(() => getAllCategories(), []);
+  const filterCategories = useMemo(() => ["Tous", ...allCategories], [allCategories]);
+  const popularArticles = useMemo(() => allArticles.slice(0, 4), [allArticles]);
 
   const filteredArticles =
     activeFilter === "Tous"
@@ -197,7 +191,7 @@ export default function ActualitesPage() {
                     <div className="mt-4 flex items-center gap-4 border-t border-[#E5E7EB] pt-4">
                       <span className="inline-flex items-center gap-1.5 font-[var(--font-body)] text-xs text-slate-400">
                         <Calendar className="h-3.5 w-3.5" />
-                        {formatDate(article.publishedAt)}
+                        {formatDateFR(article.publishedAt)}
                       </span>
                       <span className="inline-flex items-center gap-1.5 font-[var(--font-body)] text-xs text-slate-400">
                         <Clock className="h-3.5 w-3.5" />
@@ -247,7 +241,7 @@ export default function ActualitesPage() {
                         {item.title}
                       </p>
                       <p className="mt-1 font-[var(--font-body)] text-xs text-slate-400">
-                        {formatDate(item.publishedAt)}
+                        {formatDateFR(item.publishedAt)}
                       </p>
                     </div>
                   </Link>

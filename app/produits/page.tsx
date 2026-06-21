@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -35,18 +35,6 @@ const iconMap: Record<string, LucideIcon> = {
   Zap,
 };
 
-const products = getAllProducts() as Product[];
-const categoriesData = getAllCategories() as Category[];
-
-const categoryTabs = [
-  { id: "all", icon: Zap, label: "Tous les produits" },
-  ...categoriesData.map((cat) => ({
-    id: cat.id,
-    icon: iconMap[cat.icon] || Zap,
-    label: cat.name,
-  })),
-];
-
 const advantages = [
   {
     icon: ShieldCheck,
@@ -76,6 +64,21 @@ const advantages = [
 
 export default function ProduitsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
+
+  const products = useMemo(() => getAllProducts() as Product[], []);
+  const categoriesData = useMemo(() => getAllCategories() as Category[], []);
+
+  const categoryTabs = useMemo(
+    () => [
+      { id: "all", icon: Zap, label: "Tous les produits" },
+      ...categoriesData.map((cat) => ({
+        id: cat.id,
+        icon: iconMap[cat.icon] || Zap,
+        label: cat.name,
+      })),
+    ],
+    [categoriesData]
+  );
 
   const filteredProducts =
     activeCategory === "all"

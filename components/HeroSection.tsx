@@ -9,6 +9,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { getPhoneLink } from "@/lib/contact";
 
 const trustItems: Array<{
   icon: LucideIcon;
@@ -102,7 +103,7 @@ export default function HeroSection() {
             </a>
 
             <a
-              href="tel:+213500000000"
+              href={getPhoneLink()}
               className="inline-flex w-full items-center justify-center gap-3 rounded-lg border border-white/45 bg-white/5 px-5 py-3 font-[var(--font-heading)] text-xs font-bold uppercase tracking-wide text-white backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-[#003B7A] sm:w-auto xl:px-6 xl:text-sm 2xl:px-7 2xl:py-4"
             >
               <Phone className="h-5 w-5" />

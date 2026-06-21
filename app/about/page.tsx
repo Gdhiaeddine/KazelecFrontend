@@ -18,6 +18,7 @@ import {
   ClipboardCheck,
 } from "lucide-react";
 import type { Metadata } from "next";
+import { getPhoneLink } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "À propos | KAZELEC - Qualité N°1",
@@ -485,7 +486,7 @@ export default function AboutPage() {
               </p>
             </div>
             <a
-              href="tel:+213500000000"
+              href={getPhoneLink()}
               className="inline-flex shrink-0 items-center gap-3 rounded-lg bg-white px-8 py-4 font-[var(--font-heading)] text-sm font-bold uppercase tracking-wide text-[#003B7A] shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
               <Phone className="h-5 w-5" />
