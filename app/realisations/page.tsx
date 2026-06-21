@@ -105,12 +105,17 @@ const projects = [
 ];
 
 const partners = [
-  { name: "SONELGAZ", abbr: "SNG" },
-  { name: "Schneider Electric", abbr: "SE" },
-  { name: "ABB", abbr: "ABB" },
-  { name: "Siemens", abbr: "SIE" },
-  { name: "Legrand", abbr: "LGR" },
-  { name: "Nexans", abbr: "NEX" },
+  { name: "Sonatrach", logo: "/assets/realisation/sonatrach.png" },
+  { name: "Schneider Electric", logo: "/assets/realisation/Schneider_Electric.png" },
+  { name: "Cosider", logo: "/assets/realisation/Cosider_Logo.svg" },
+  { name: "Condor", logo: "/assets/realisation/Condor.svg" },
+  { name: "Hyundai", logo: "/assets/realisation/Hyundai.png" },
+  { name: "Sarpi", logo: "/assets/realisation/sarpi.png" },
+  { name: "Reelec", logo: "/assets/realisation/Reelec.png" },
+  { name: "Profert Agri", logo: "/assets/realisation/profertagri.png" },
+  { name: "Géant Electronics", logo: "/assets/realisation/geant-electronics.png" },
+  { name: "El Fiyafi", logo: "/assets/realisation/elfiyafi.png" },
+  { name: "Alelec", logo: "/assets/realisation/alelec.png" },
 ];
 
 const whyCards = [
@@ -353,18 +358,19 @@ export default function RealisationsPage() {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
             {partners.map((partner) => (
               <div
                 key={partner.name}
-                className="group/partner flex flex-col items-center justify-center rounded-xl bg-white px-4 py-8 shadow-sm ring-1 ring-[#E5E7EB] transition-all duration-300 hover:scale-105 hover:shadow-md"
+                className="flex h-16 items-center transition-opacity duration-300 hover:opacity-70"
               >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#003B7A]/10 font-[var(--font-heading)] text-lg font-extrabold text-[#003B7A] transition-colors duration-300 group-hover/partner:bg-[#003B7A] group-hover/partner:text-white">
-                  {partner.abbr}
-                </div>
-                <span className="mt-3 text-center font-[var(--font-heading)] text-xs font-bold text-[#002B5C]">
-                  {partner.name}
-                </span>
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={140}
+                  height={64}
+                  className="h-full w-auto object-contain"
+                />
               </div>
             ))}
           </div>
